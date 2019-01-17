@@ -11,7 +11,7 @@ import rosegraphics as rg
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    # run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,22 +80,46 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
-    for i in range(r):
+    x = circle.center.x
+    y = circle.center.y
+    radius = circle.radius
+    color = circle.fill_color
+    for i in range(r - 3):
         for j in range(3):
-            circle.attach_to(window)
-            circle.center.y = circle.center.y + circle.center.y
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = color
+            new_circle.attach_to(window)
+            x = x + (2*radius)
+        y = y + 2 * radius
+        x = circle.center.x
+
+    for i in range(3):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = color
+            new_circle.attach_to(window)
+            x = x + (2 * radius)
+        y = y + 2 * radius
+        x = circle.center.x
+
+    for i in range(3):
+        for j in range(c + 3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = color
+            new_circle.attach_to(window)
+            x = x + (2 * radius)
+        y = y + 2 * radius
+        x = circle.center.x
     window.render()
-
-
 
 
 def run_test_draw_wall_on_right():
     """ Tests the    draw_wall_on_right    function. """
     # Tests 1 and 2 are ALREADY DONE (here).
-    window = rg.RoseWindow(550, 300, 'Wall on the right, Tests 1 and 2')
+    window = rg.RoseWindow(550, 700, 'Wall on the right, Tests 1 and 2')
 
     window.continue_on_mouse_click('Click to run Test 1.')
 
@@ -128,10 +152,28 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    c1 = rectangle.corner_1
+    c2 = rectangle.corner_2
+    originc1 = c1.clone()
+    originc2 = c2.clone()
+    c3 = c2.y - c1.y
+    c4 = c2.x - c1.x
+    for i in range(n):
+        for j in range(n - i):
+            rect = rg.Rectangle(c1, c2)
+            rect.attach_to(window)
+            c1.y = c2.y
+            c2.y = c2.y + c3
 
+        c2.x = c1.x
+        c1.x = c1.x - c4
+        c1.y = originc2.y + ((i) * c3)
+        c2.y = originc2.y + ((i + 1) * c3)
+
+    window.render()
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
