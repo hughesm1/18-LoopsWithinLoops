@@ -175,6 +175,7 @@ def draw_wall_on_right(rectangle, n, window):
 
     window.render()
 
+
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
