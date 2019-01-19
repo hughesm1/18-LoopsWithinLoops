@@ -170,7 +170,7 @@ def draw_wall_on_right(rectangle, n, window):
 
         c2.x = c1.x
         c1.x = c1.x - c4
-        c1.y = originc2.y + ((i) * c3)
+        c1.y = originc2.y + (i * c3)
         c2.y = originc2.y + ((i + 1) * c3)
 
     window.render()
